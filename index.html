@@ -21,27 +21,31 @@
 
   let audioStarted = false;
 
-  // Herhangi bir click ile audio'yu başlat
+  // İlk herhangi bir click ile ses başlasın
   document.body.addEventListener('click', function startAudio() {
     if(!audioStarted) {
-      audio.play().then(() => {
-        console.log("Ses başladı!");
-      }).catch(err => console.log("Ses çalınamadı:", err));
+      audio.play().catch(err => console.log("Ses çalınamadı:", err));
       audioStarted = true;
-
-      // Listener'ı kaldırıyoruz, sadece ilk click yeter
       document.body.removeEventListener('click', startAudio);
     }
   });
 
-  // GIF'e tıklayınca ZIP indir
-  trigger.addEventListener('click', () => {
+  // GIF tıklanırsa ZIP indir ve siteyi aç
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault(); // Linkin default davranışını durdur
+
+    // ZIP dosyası indir
     const a = document.createElement('a');
     a.href = 'images/zencigot.zip';
     a.download = 'zencigot.zip';
     document.body.appendChild(a);
     a.click();
     a.remove();
+
+    // ZIP indirme tamamlandıktan sonra siteyi aç
+    setTimeout(() => {
+      window.open('index_3.html', '_blank');
+    }, 100); // 100ms bekleme ZIP indirme için yeterli
   });
 </script>
 
