@@ -4,32 +4,54 @@
   <meta charset="UTF-8">
   <title>TRANSİSTÖR</title>
   <style>
-    body { background:#111; text-align:center; color:white; font-family:sans-serif; }
-    img { width:200px; margin:20px; cursor:pointer; border:3px solid #fff; border-radius:8px; }
+    body { 
+      background: #111; 
+      text-align: center; 
+      color: white; 
+      font-family: sans-serif; 
+    }
+    img { 
+      width: 200px; 
+      margin: 20px; 
+      cursor: pointer; 
+      border: 3px solid #fff; 
+      border-radius: 8px; 
+    }
   </style>
 </head>
 <body>
-<audio id="madagascarpengu" src="./audios/madagascarpengu.mp3" autoplay loop></audio>
+
 <h1>TIKLA!</h1>
 
-<a href="index_3.html" target="_blank"><img id="triggerGif" src="images/yellow-among-us-shaking-butt-ypx10edthwj8jj1y.gif" alt="Tıkla!"></a>
+<a href="index_3.html" target="_blank">
+  <img id="triggerGif" src="images/yellow-among-us-shaking-butt-ypx10edthwj8jj1y.gif" alt="Tıkla!">
+</a>
 
+<audio id="madagascarpengu" src="./audios/madagascarpengu.mp3" loop></audio>
 
 <script>
-document.getElementById('triggerGif').addEventListener('click', () => {
-  const a = document.createElement('a');
-  a.href = 'images/zencigot.zip'; // ZIP dosyasının yolu
-  a.download = 'zencigot.zip';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-});
-</script>
+  const audio = document.getElementById('madagascarpengu');
+  const trigger = document.getElementById('triggerGif');
 
-<script src="./audio.js"></script>
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault(); // Eğer linkin index_3.html açmasını istemiyorsan
+                          // kaldırabilirsin
+
+    // ZIP dosyası indirme
+    const a = document.createElement('a');
+    a.href = 'images/zencigot.zip';
+    a.download = 'zencigot.zip';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    // Ses çalma
+    audio.play().catch(err => console.log("Ses çalınamadı:", err));
+
+    // Orijinal linki açmak istersen:
+    window.open('index_3.html', '_blank');
+  });
+</script>
 
 </body>
 </html>
-
-
-
