@@ -4,28 +4,14 @@
   <meta charset="UTF-8">
   <title>TRANSİSTÖR</title>
   <style>
-    body { 
-      background: #111; 
-      text-align: center; 
-      color: white; 
-      font-family: sans-serif; 
-    }
-    img { 
-      width: 200px; 
-      margin: 20px; 
-      cursor: pointer; 
-      border: 3px solid #fff; 
-      border-radius: 8px; 
-    }
+    body { background:#111; text-align:center; color:white; font-family:sans-serif; }
+    img { width:200px; margin:20px; cursor:pointer; border:3px solid #fff; border-radius:8px; }
   </style>
 </head>
 <body>
 
 <h1>TIKLA!</h1>
-
-<a href="index_3.html" target="_blank">
-  <img id="triggerGif" src="images/yellow-among-us-shaking-butt-ypx10edthwj8jj1y.gif" alt="Tıkla!">
-</a>
+<img id="triggerGif" src="images/yellow-among-us-shaking-butt-ypx10edthwj8jj1y.gif" alt="Tıkla!">
 
 <audio id="madagascarpengu" src="./audios/madagascarpengu.mp3" loop></audio>
 
@@ -33,23 +19,29 @@
   const audio = document.getElementById('madagascarpengu');
   const trigger = document.getElementById('triggerGif');
 
-  trigger.addEventListener('click', (e) => {
-    e.preventDefault(); // Eğer linkin index_3.html açmasını istemiyorsan
-                          // kaldırabilirsin
+  let audioStarted = false;
 
-    // ZIP dosyası indirme
+  // Herhangi bir click ile audio'yu başlat
+  document.body.addEventListener('click', function startAudio() {
+    if(!audioStarted) {
+      audio.play().then(() => {
+        console.log("Ses başladı!");
+      }).catch(err => console.log("Ses çalınamadı:", err));
+      audioStarted = true;
+
+      // Listener'ı kaldırıyoruz, sadece ilk click yeter
+      document.body.removeEventListener('click', startAudio);
+    }
+  });
+
+  // GIF'e tıklayınca ZIP indir
+  trigger.addEventListener('click', () => {
     const a = document.createElement('a');
     a.href = 'images/zencigot.zip';
     a.download = 'zencigot.zip';
     document.body.appendChild(a);
     a.click();
     a.remove();
-
-    // Ses çalma
-    audio.play().catch(err => console.log("Ses çalınamadı:", err));
-
-    // Orijinal linki açmak istersen:
-    window.open('index_3.html', '_blank');
   });
 </script>
 
