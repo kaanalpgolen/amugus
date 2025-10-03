@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>TRANSİSTÖR</title>
+  <style>
+    body { background:#111; text-align:center; color:white; font-family:sans-serif; }
+    img { width:200px; margin:20px; cursor:pointer; border:3px solid #fff; border-radius:8px; }
+  </style>
+</head>
+<body>
+
+<h1>TIKLA!</h1>
+
 <a href="index_3.html" target="_blank" id="linkWrapper">
   <img id="triggerGif" src="images/yellow-among-us-shaking-butt-ypx10edthwj8jj1y.gif" alt="Tıkla!">
 </a>
@@ -18,13 +32,18 @@ document.body.addEventListener('click', function startAudio() {
     }
 });
 
-// GIF tıklanınca ZIP indir
+// GIF tıklanınca ZIP indir (küçük gecikme ile)
 link.addEventListener('click', (e) => {
-    // ZIP indirme
-    const a = document.createElement('a');
-    a.href = 'images/zencigot.zip';
-    a.download = 'zencigot.zip';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = 'images/zencigot.zip';
+        a.download = 'zencigot.zip';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    }, 50); // 50ms gecikme, site açılmasını bozmaz
 });
+</script>
+
+</body>
+</html>
