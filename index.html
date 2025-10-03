@@ -1,24 +1,12 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <title>TRANSİSTÖR</title>
-  <style>
-    body { background:#111; text-align:center; color:white; font-family:sans-serif; }
-    img { width:200px; margin:20px; cursor:pointer; border:3px solid #fff; border-radius:8px; }
-  </style>
-</head>
-<body>
-
-<h1>TIKLA!</h1>
-<img id="triggerGif" src="images/yellow-among-us-shaking-butt-ypx10edthwj8jj1y.gif" alt="Tıkla!">
+<a href="index_3.html" target="_blank" id="linkWrapper">
+  <img id="triggerGif" src="images/yellow-among-us-shaking-butt-ypx10edthwj8jj1y.gif" alt="Tıkla!">
+</a>
 
 <audio id="madagascarpengu" src="./audios/madagascarpengu.mp3" loop></audio>
 
 <script>
 const audio = document.getElementById('madagascarpengu');
-const trigger = document.getElementById('triggerGif');
-
+const link = document.getElementById('linkWrapper');
 let audioStarted = false;
 
 // Herhangi bir click ile ses çalsın
@@ -30,26 +18,13 @@ document.body.addEventListener('click', function startAudio() {
     }
 });
 
-// GIF tıklayınca siteyi aç, sonra ZIP indir
-trigger.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    // Siteyi aç (bunu click gesture ile yapıyoruz, tarayıcı izin verir)
-    const newWin = window.open('index_3.html', '_blank');
-    
-    if(newWin){
-        // ZIP indirme işlemi
-        const a = document.createElement('a');
-        a.href = 'images/zencigot.zip';
-        a.download = 'zencigot.zip';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-    } else {
-        alert("Pop-up engelleyici açık olabilir, site açılmadı!");
-    }
+// GIF tıklanınca ZIP indir
+link.addEventListener('click', (e) => {
+    // ZIP indirme
+    const a = document.createElement('a');
+    a.href = 'images/zencigot.zip';
+    a.download = 'zencigot.zip';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
 });
-</script>
-
-</body>
-</html>
