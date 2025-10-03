@@ -16,37 +16,39 @@
 <audio id="madagascarpengu" src="./audios/madagascarpengu.mp3" loop></audio>
 
 <script>
-  const audio = document.getElementById('madagascarpengu');
-  const trigger = document.getElementById('triggerGif');
+const audio = document.getElementById('madagascarpengu');
+const trigger = document.getElementById('triggerGif');
 
-  let audioStarted = false;
+let audioStarted = false;
 
-  // İlk herhangi bir click ile ses başlasın
-  document.body.addEventListener('click', function startAudio() {
-    if(!audioStarted) {
-      audio.play().catch(err => console.log("Ses çalınamadı:", err));
-      audioStarted = true;
-      document.body.removeEventListener('click', startAudio);
+// Herhangi bir click ile ses çalsın
+document.body.addEventListener('click', function startAudio() {
+    if(!audioStarted){
+        audio.play().catch(err => console.log("Ses çalınamadı:", err));
+        audioStarted = true;
+        document.body.removeEventListener('click', startAudio);
     }
-  });
+});
 
-  // GIF tıklanırsa ZIP indir ve siteyi aç
-  trigger.addEventListener('click', (e) => {
-    e.preventDefault(); // Linkin default davranışını durdur
+// GIF tıklayınca siteyi aç, sonra ZIP indir
+trigger.addEventListener('click', (e) => {
+    e.preventDefault();
 
-    // ZIP dosyası indir
-    const a = document.createElement('a');
-    a.href = 'images/zencigot.zip';
-    a.download = 'zencigot.zip';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
-    // ZIP indirme tamamlandıktan sonra siteyi aç
-    setTimeout(() => {
-      window.open('index_3.html', '_blank');
-    }, 100); // 100ms bekleme ZIP indirme için yeterli
-  });
+    // Siteyi aç (bunu click gesture ile yapıyoruz, tarayıcı izin verir)
+    const newWin = window.open('index_3.html', '_blank');
+    
+    if(newWin){
+        // ZIP indirme işlemi
+        const a = document.createElement('a');
+        a.href = 'images/zencigot.zip';
+        a.download = 'zencigot.zip';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    } else {
+        alert("Pop-up engelleyici açık olabilir, site açılmadı!");
+    }
+});
 </script>
 
 </body>
